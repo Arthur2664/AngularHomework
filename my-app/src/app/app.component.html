@@ -1,2 +1,4 @@
 
-<div *ngIf="lstCity?.term"></div>
+<div *ngFor="let city of lstCity">
+      <p>{{city.term}}</p>
+</div>

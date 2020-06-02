@@ -13,10 +13,12 @@ constructor(private httpclient: HttpClient) {}
         headers: new HttpHeaders({
             'x-rapidapi-host':  'hotels4.p.rapidapi.com',
             'x-rapidapi-key': 'e53e1ff361msh0a704e0626bd852p142813jsn633fc496d795'
-          })
-    
+          }),
+          params: new HttpParams()
+          .set('query',"new york")
+          .set('locale', "en_US")
     }    
-    return this.httpclient.get("https://hotels4.p.rapidapi.com/locations/search?locale=en_US&query=new york",httpOptions)
+    return this.httpclient.get("https://hotels4.p.rapidapi.com/locations/search",httpOptions)
 }
 
 
