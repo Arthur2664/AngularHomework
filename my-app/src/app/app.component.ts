@@ -11,8 +11,8 @@ import {City} from './classes/city'
 export class AppComponent implements OnInit  {
   constructor(private _freeApiService: freeApiService){
   } 
-  lstCity:City[];
-  ngOnInit(){
+  public lstCity:City[];
+   ngOnInit() : void{
     
     this._freeApiService.getCity()
     .subscribe(

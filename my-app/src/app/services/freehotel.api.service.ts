@@ -8,7 +8,7 @@ export class freeApiService{
 constructor(private httpclient: HttpClient) {}
 
 
-getCity(): Observable<any>{
+ getCity(): Observable<any>{
     const httpOptions = {   
         headers: new HttpHeaders({
             'x-rapidapi-host':  'hotels4.p.rapidapi.com',
