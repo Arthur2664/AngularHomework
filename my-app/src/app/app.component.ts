@@ -11,15 +11,15 @@ import {City} from './classes/city'
 export class AppComponent implements OnInit  {
   constructor(private _freeApiService: freeApiService){
   } 
-  public lstCity:City[];
+
+   lstCity : City
    ngOnInit() : void{
-    
     this._freeApiService.getCity()
     .subscribe(
       data=>
       {
-        this.lstCity = data;
-        console.log(this.lstCity)
+        this.lstCity = data
+        console.log(this.lstCity.term)
       } 
 
     );

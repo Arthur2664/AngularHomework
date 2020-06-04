@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from  '@angular/common/http'
 import { FormsModule } from  '@angular/forms'
 import { freeApiService } from './services/freehotel.api.service';
+import { AppHeaderComponent } from './app-header/app-header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppHeaderComponent
   ],
   imports: [
      BrowserModule,
