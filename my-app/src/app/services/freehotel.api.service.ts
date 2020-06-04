@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs'
 import { HttpClient,HttpParams,HttpHeaders } from  '@angular/common/http'
 
 import {City, EntitiesEntity} from './city'
+import {hotels} from './hotels'
 
 @Injectable()
 export class freeApiService{
@@ -13,17 +14,13 @@ constructor(private httpclient: HttpClient) {}
 private cityTerm = new BehaviorSubject<string>("New York")
 currentCityTerm = this.cityTerm.asObservable()
 
-Entities : Entities[]
+private destinationID = new BehaviorSubject<string>("1506246")
+currentDestinationID = this.destinationID.asObservable()
 
+changeCity(cityTerm : string, destinaionID : string){
 
-private lstLandmark = new BehaviorSubject<EntitiesEntity[]>(this.Entities)
-currentlstLandmark = this.lstLandmark.asObservable()
-
-changeCity(cityTerm : string, lstLandmark : EntitiesEntity[]){
-
-this.lstLandmark.next(lstLandmark)    
 this.cityTerm.next(cityTerm)
-console.log(lstLandmark)
+this.destinationID.next(destinaionID)
 
 
 }
@@ -32,7 +29,7 @@ console.log(lstLandmark)
     const httpOptions = {   
         headers: new HttpHeaders({
             'x-rapidapi-host':  'hotels4.p.rapidapi.com',
-            'x-rapidapi-key': 'e53e1ff361msh0a704e0626bd852p142813jsn633fc496d795'
+            'x-rapidapi-key': 'a338118cdbmsh03299e0429e102ap14fc30jsn8fb88b75fc8f'
           }),
           params: new HttpParams()
           .set('query',cityTerm)
@@ -40,19 +37,27 @@ console.log(lstLandmark)
     }    
     return this.httpclient.get<City>("https://hotels4.p.rapidapi.com/locations/search",httpOptions)
 }
+getHotels(destinaionID : string) : Observable<hotels>{
+    const httpOptions = {   
+        headers: new HttpHeaders({
+            'x-rapidapi-host':  'hotels4.p.rapidapi.com',
+            'x-rapidapi-key': 'a338118cdbmsh03299e0429e102ap14fc30jsn8fb88b75fc8f'
+          }),
+          params: new HttpParams()
+          .set('currency',"USD")
+          .set('locale', "en_US")      
+          .set('sortOrder', "PRICE")  
+          .set('destinationId', destinaionID.toString())  
+          .set('pageNumber', "1")  
+          .set('checkIn', "2020-01-08")  
+          .set('checkOut', "2020-01-15")  
+          .set('pageSize', "3")
+          .set('adults1', "1")
 
+    }    
+    return this.httpclient.get<hotels>("https://hotels4.p.rapidapi.com/properties/list",httpOptions)
 
 }
 
-export class Entities {
-    geoId = "1000000000000502103";
-    destinationId =  "1634221";
-    landmarkCityDestinationId?: "1634221" | null;
-    type = "LANDMARK";
-    caption =  "<span class='highlighted'>New</span> <span class='highlighted'>York</span> University, New York, United States of America";
-    redirectPage = "DEFAULT_PAGE";
-    latitude = 40.72984;
-    longitude = -73.99529;
-    name =  "New York University";
 
 }

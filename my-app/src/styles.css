@@ -173,7 +173,7 @@ i.fa.fa-user {
     width: 50%;
 }
 .wthree-right {
-    float: left;
+    float: right;
     width: 44.7%;
     background: #fff;
 }
@@ -186,7 +186,7 @@ i.fa.fa-user {
     color: #fff;
     font-size: 28px;
     font-weight: 700;
-    margin-top: 16px;
+    margin-top: 20px;
 }
 .wthree-left h4 {
     color: #fff;
@@ -250,7 +250,6 @@ ul.w3ls_weather h5 {
 }
 ul.w3ls_weather {
     padding: 18px;
-    border-bottom: 1px solid #000;
 }
 li.lft {
     float: left;
@@ -286,7 +285,7 @@ input#datepicker,input#datepicker1 {
 /*---- responsive-design -----*/
 @media(max-width:1440px){
 .wthree-left {
-    width: 49%;
+    width: 51.1%;
 }
 .wthree-right {
 	width: 45.1%;
@@ -533,3 +532,5 @@ ul.w3ls_weather h5 {
     margin: 12px 0 0;
 }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

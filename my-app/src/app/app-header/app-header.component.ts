@@ -12,36 +12,29 @@ export class AppHeaderComponent implements OnInit {
   } 
   
   cityTerm : string
-
+  destinationID :string
   onEnter(value: string) { 
     this.cityTerm = value 
-    console.log(value)
+    console.log(this.cityTerm)
     this._freeApiService.getCity(this.cityTerm)
-    .subscribe(
-      data=>
-      {
-        this.lstCity = data
-        console.log(this.lstCity)
-      } 
-
-    );
-    this._freeApiService.changeCity(this.cityTerm,this.lstCity.suggestions[1].entities)
+      .subscribe(
+        data=>
+        {
+          this.lstCity = data
+          console.log(this.lstCity)
+          this.destinationID = this.lstCity.suggestions[0].entities[0].destinationId
+          
+        } 
+        
+        )  
+        console.log(this.destinationID)
+        this._freeApiService.changeCity(this.cityTerm,this.destinationID)
+    console.log(this.cityTerm + this.destinationID)
   }  
   lstCity : City
-  lstLandmark : EntitiesEntity[] 
   ngOnInit(): void {
     this._freeApiService.currentCityTerm.subscribe(cityTerm => this.cityTerm = cityTerm)
-    this._freeApiService.currentlstLandmark.subscribe(lstLandmark => this.lstLandmark = lstLandmark)
-    this._freeApiService.getCity(this.cityTerm)
-    .subscribe(
-      data=>
-      {
-        this.lstCity = data
-        console.log(this.lstCity)
-      } 
-      
-      )
-      console.log(this.lstLandmark[0].name+ this.cityTerm)
+    this._freeApiService.currentDestinationID.subscribe(destinationID => this.destinationID = destinationID)
     }
 
 

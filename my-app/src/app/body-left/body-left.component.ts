@@ -1,6 +1,6 @@
 import { Component, OnChanges , Input , SimpleChanges, OnInit  } from '@angular/core';
-import { EntitiesEntity } from '../services/city';
-
+import { freeApiService } from '../services/freehotel.api.service';
+import {City, EntitiesEntity} from 'src/app/services/city'
 
 @Component({
   selector: 'app-body-left',
@@ -9,20 +9,29 @@ import { EntitiesEntity } from '../services/city';
 })
 export class BodyLeftComponent implements OnChanges , OnInit {
 
-  constructor() { }
+  constructor(private _freeApiService: freeApiService) { }
   
   @Input() cityTerm : string
-  @Input() lstLandmark : EntitiesEntity[]
   
+  lstCity : City
 
   ngOnInit(){
-    console.log(this.lstLandmark)
+
   }
 
+    ngOnChanges(changes : SimpleChanges){
+      console.log("I AM WORKING")
+      this._freeApiService.getCity(this.cityTerm)
+      .subscribe(
+        data=>
+        {
+          this.lstCity = data
+          console.log(this.lstCity)  
+        } 
+        
+        )  
+    }
   
-  ngOnChanges(changes: SimpleChanges){ 
-  console.log(this.lstLandmark)
-  }
   
 
 }

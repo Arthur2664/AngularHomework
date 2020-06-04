@@ -19,25 +19,11 @@
         </ul>
     </div>
     <div class="w3-agileits-bottom">
-    <ul class="w3ls_weather">
-        <li class="lft"><h4>Park Hyatt Sydney</h4><span>7 Hickson Road Sydney</span></li>
-        <li class="rt"><h5>952 $</h5><span>Pernight 520 $</span></li>
-        <div class="clear"> </div>
-    </ul>
-    <ul class="w3ls_weather">
-        <li class="lft"><h4>Hilton Sydney</h4><span>488 George Street Sydney</span></li>
-        <li class="rt"><h5>1052 $</h5><span>Pernight 650 $</span></li>
-        <div class="clear"> </div>
-    </ul>
-    <ul class="w3ls_weather">
-        <li class="lft"><h4>The Westin Sydney</h4><span>1 Martin Place Sydney</span></li>
-        <li class="rt"><h5>869 $</h5><span>Pernight 400 $</span></li>
-        <div class="clear"> </div>
-    </ul>
-    <ul class="w3ls_weather">
-        <li class="lft"><h4>Primus Hotel Sydney</h4><span>339 Pit Street Sydney</span></li>
-        <li class="rt"><h5>1122 $</h5><span>Pernight 730 $</span></li>
-        <div class="clear"> </div>
-    </ul>
+    <ul *ngFor = "let landmark of lstHotel.data.body.searchResults.results" class="w3ls_weather">        
+            <li class="lft"><h4>{{landmark.name}}</h4><span>{{landmark.address.streetAddress}}</span></li>
+            <li class="rt"><h5>952 $</h5><span>Pernight 520 $</span></li>
+            <div class="clear"> </div>            
+    </ul>        
+    
     </div>
 </div>

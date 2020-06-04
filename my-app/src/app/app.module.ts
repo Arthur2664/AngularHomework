@@ -10,6 +10,8 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { BodyComponent } from './body/body.component';
 import { BodyLeftComponent } from './body-left/body-left.component';
 import { BodyRightComponent } from './body-right/body-right.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card'
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { BodyRightComponent } from './body-right/body-right.component';
   imports: [
      BrowserModule,
      HttpClientModule,
-     FormsModule
+     FormsModule,
+     BrowserAnimationsModule,
+     MatCardModule
   ],
   providers: [freeApiService],
   bootstrap: [AppComponent]
