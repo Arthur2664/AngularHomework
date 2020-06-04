@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { freeApiService } from './services/freehotel.api.service';
 
-import {City} from './classes/city'
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,18 +10,8 @@ export class AppComponent implements OnInit  {
   constructor(private _freeApiService: freeApiService){
   } 
 
-   lstCity : City
+   
    ngOnInit() : void{
-    this._freeApiService.getCity()
-    .subscribe(
-      data=>
-      {
-        this.lstCity = data
-        console.log(this.lstCity.term)
-      } 
-
-    );
-
-  }
+    }
   
 }
