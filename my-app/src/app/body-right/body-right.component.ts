@@ -1,7 +1,7 @@
 import { Component, OnChanges , Input , SimpleChanges, OnInit  } from '@angular/core';
 import { freeApiService } from '../services/freehotel.api.service';
-import {City, EntitiesEntity} from 'src/app/services/city'
-import { hotels } from '../services/hotels';
+import { Hotels } from '../services/hotels';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-body-right',
@@ -11,31 +11,27 @@ import { hotels } from '../services/hotels';
 export class BodyRightComponent implements OnInit , OnChanges {
 
   constructor(private _freeApiService: freeApiService) { }
-
-  @Input() cityTerm : string
   @Input() destinationID : string
+  @Input() cityTerm : string
+
   
-  lstCity : City
-  lstHotel : hotels
+  totalCount : number
+ 
+
+  lstHotel : Hotels
   ngOnInit(): void {
+    this._freeApiService.currentTotalCount.subscribe(totalCount => this.totalCount = totalCount)
   }
+
     ngOnChanges(changes : SimpleChanges){
-      console.log("I AM WORKING")
-      this._freeApiService.getCity(this.cityTerm)
-      .subscribe(
-        data=>
-        {
-          this.lstCity = data
-          console.log(this.lstCity)
-  
-        } 
-        ) 
+      console.log("Something changed RIGHT")
       this._freeApiService.getHotels(this.destinationID)
-        .subscribe(
+        .then(
           data=>
           {
             this.lstHotel = data
             console.log(this.lstHotel)
+            this._freeApiService.updateTotalCount(data.data.body.searchResults.totalCount)
           }
         )
         

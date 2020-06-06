@@ -21,7 +21,7 @@
     <div class="w3-agileits-bottom">
     <ul *ngFor = "let landmark of lstHotel.data.body.searchResults.results" class="w3ls_weather">        
             <li class="lft"><h4>{{landmark.name}}</h4><span>{{landmark.address.streetAddress}}</span></li>
-            <li class="rt"><h5>952 $</h5><span>Pernight 520 $</span></li>
+            <li class="rt"><h5>{{(landmark.ratePlan.price.exactCurrent * 7) | number:'3.1-5'}}</h5><span>{{landmark.ratePlan.price.current}}</span></li>
             <div class="clear"> </div>            
     </ul>        
     

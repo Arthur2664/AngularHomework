@@ -8,6 +8,7 @@ import {City, EntitiesEntity} from 'src/app/services/city'
   styleUrls: ['./body-left.component.css']
 })
 export class BodyLeftComponent implements OnChanges , OnInit {
+  
 
   constructor(private _freeApiService: freeApiService) { }
   
@@ -15,14 +16,16 @@ export class BodyLeftComponent implements OnChanges , OnInit {
   
   lstCity : City
 
+  totalCount: number;
+  
   ngOnInit(){
-
+    this._freeApiService.currentTotalCount.subscribe(totalCount => this.totalCount = totalCount)
   }
 
     ngOnChanges(changes : SimpleChanges){
-      console.log("I AM WORKING")
+      console.log("Something changed LEFT")
       this._freeApiService.getCity(this.cityTerm)
-      .subscribe(
+      .then(
         data=>
         {
           this.lstCity = data

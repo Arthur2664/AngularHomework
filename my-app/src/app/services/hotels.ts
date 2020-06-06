@@ -1,4 +1,4 @@
-export interface hotels {
+export interface Hotels {
     result: string;
     data: Data;
   }

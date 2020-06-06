@@ -13,28 +13,29 @@ export class AppHeaderComponent implements OnInit {
   
   cityTerm : string
   destinationID :string
+  changeDestinationID(destinationID : string){
+    this.destinationID = destinationID
+    console.log("YA TYPOE")
+  }
   onEnter(value: string) { 
     this.cityTerm = value 
     console.log(this.cityTerm)
     this._freeApiService.getCity(this.cityTerm)
-      .subscribe(
+      .then(
         data=>
         {
           this.lstCity = data
           console.log(this.lstCity)
-          this.destinationID = this.lstCity.suggestions[0].entities[0].destinationId
-          
-        } 
-        
-        )  
-        console.log(this.destinationID)
-        this._freeApiService.changeCity(this.cityTerm,this.destinationID)
+          this.changeDestinationID(data.suggestions[0].entities[0].destinationId)  
+          console.log(this.destinationID)
+          this._freeApiService.changeCity(this.cityTerm,this.destinationID)
+        })
     console.log(this.cityTerm + this.destinationID)
   }  
   lstCity : City
   ngOnInit(): void {
     this._freeApiService.currentCityTerm.subscribe(cityTerm => this.cityTerm = cityTerm)
-    this._freeApiService.currentDestinationID.subscribe(destinationID => this.destinationID = destinationID)
+    this._freeApiService.currentDestinationID.subscribe(destinationID => this.destinationID = destinationID) 
     }
 
 

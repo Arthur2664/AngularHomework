@@ -17,7 +17,7 @@ export class BodyComponent implements OnInit {
   destinationID :string
   
   ngOnInit(): void {
-    this._freeApiService.currentCityTerm.subscribe(cityTerm => this.cityTerm = cityTerm)  
+    this._freeApiService.currentCityTerm.subscribe(cityTerm => this.cityTerm = cityTerm)   
     this._freeApiService.currentDestinationID.subscribe(destinationID => this.destinationID = destinationID)  
   }
   

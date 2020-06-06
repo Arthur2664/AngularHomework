@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs'
 import { HttpClient,HttpParams,HttpHeaders } from  '@angular/common/http'
 
 import {City, EntitiesEntity} from './city'
-import {hotels} from './hotels'
+import {Hotels} from './hotels'
 
 @Injectable()
 export class freeApiService{
@@ -17,6 +17,9 @@ currentCityTerm = this.cityTerm.asObservable()
 private destinationID = new BehaviorSubject<string>("1506246")
 currentDestinationID = this.destinationID.asObservable()
 
+private totalCount = new BehaviorSubject<number>(1519)
+  currentTotalCount = this.totalCount.asObservable()
+
 changeCity(cityTerm : string, destinaionID : string){
 
 this.cityTerm.next(cityTerm)
@@ -25,23 +28,27 @@ this.destinationID.next(destinaionID)
 
 }
 
- getCity(cityTerm : string) : Observable<City>{
+updateTotalCount(totalCount : number){
+    this.totalCount.next(totalCount)
+  }
+
+async getCity (cityTerm : string) : Promise<City>{
     const httpOptions = {   
         headers: new HttpHeaders({
             'x-rapidapi-host':  'hotels4.p.rapidapi.com',
-            'x-rapidapi-key': 'a338118cdbmsh03299e0429e102ap14fc30jsn8fb88b75fc8f'
+            'x-rapidapi-key': 'fd0696ac5emsh17ae4b8eaf94e10p15ecf2jsn36faee2dcf66'
           }),
           params: new HttpParams()
           .set('query',cityTerm)
           .set('locale', "en_US")      
     }    
-    return this.httpclient.get<City>("https://hotels4.p.rapidapi.com/locations/search",httpOptions)
+    return await this.httpclient.get<City>("https://hotels4.p.rapidapi.com/locations/search",httpOptions).toPromise()
 }
-getHotels(destinaionID : string) : Observable<hotels>{
+async getHotels(destinaionID : string) : Promise<Hotels>{
     const httpOptions = {   
         headers: new HttpHeaders({
             'x-rapidapi-host':  'hotels4.p.rapidapi.com',
-            'x-rapidapi-key': 'a338118cdbmsh03299e0429e102ap14fc30jsn8fb88b75fc8f'
+            'x-rapidapi-key': 'fd0696ac5emsh17ae4b8eaf94e10p15ecf2jsn36faee2dcf66'
           }),
           params: new HttpParams()
           .set('currency',"USD")
@@ -55,7 +62,7 @@ getHotels(destinaionID : string) : Observable<hotels>{
           .set('adults1', "1")
 
     }    
-    return this.httpclient.get<hotels>("https://hotels4.p.rapidapi.com/properties/list",httpOptions)
+    return await this.httpclient.get<Hotels>("https://hotels4.p.rapidapi.com/properties/list",httpOptions).toPromise()
 
 }
 
